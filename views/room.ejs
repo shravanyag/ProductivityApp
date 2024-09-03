@@ -44,6 +44,50 @@
 
     <!-- css -->
     <link rel="stylesheet" href="/styles/room.css" />
+
+    <style>
+      .todo {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        display: none;
+        z-index: 1000;
+        width: 250px;
+      }
+
+      .todo-toggle {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background-color: #007bff;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .main__header {
+        margin-top: 0;
+      }
+
+      #todo-list {
+        list-style-type: none; /* Removes bullet points */
+        padding-left: 0;
+      }
+
+      .main__message_container {
+        display: flex;
+        gap: 5px;
+        margin-top: 10px;
+      }
+    </style>
+    
   </head>
   <body>
     <div class="dark-light">
@@ -128,19 +172,22 @@
             </div>
           </div>
 
+          <button class="todo-toggle" onclick="toggleTodo()">To-Do List</button>
+
           <div class="todo">
             <div class="main__header" style="margin-top: 20px">
-              <h4>Chat</h4>
+              <h4>To-Do List</h4>
             </div>
-            <div class="main__chat_window">
-              <ul class="messages"></ul>
+            <div class="main__todo_window">
+              <ul id="todo-list"></ul>
             </div>
             <div class="main__message_container">
               <input
-                id="chat_message"
+                id="todo_input"
                 type="text"
-                placeholder="Type message here..."
+                placeholder="Add new task..."
               />
+              <button onclick="addTodo()">Add</button>
             </div>
           </div>
           
@@ -149,4 +196,36 @@
     </div>
   </body>
   <!-- <script src="/js/home.js" defer></script> -->
+  <script>
+    function toggleTodo() {
+        const todoDiv = document.querySelector(".todo");
+        if (todoDiv.style.display === "none" || todoDiv.style.display === "") {
+          todoDiv.style.display = "block";
+        } else {
+          todoDiv.style.display = "none";
+        }
+      }
+
+    function addTodo() {
+      const todoInput = document.getElementById("todo_input");
+      const todoList = document.getElementById("todo-list");
+      const newTask = todoInput.value;
+      if (newTask) {
+        const listItem = document.createElement("li");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.id = "todo-" + todoList.children.length;
+        
+        const label = document.createElement("label");
+        label.htmlFor = checkbox.id;
+        label.textContent = newTask;
+
+        listItem.appendChild(checkbox);
+        listItem.appendChild(label);
+        todoList.appendChild(listItem);
+        
+        todoInput.value = "";
+      }
+    }
+  </script>
 </html>
