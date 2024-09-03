@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
 * {
   outline: none;
   box-sizing: border-box;
@@ -49,10 +49,9 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 
-  font-family: var(--body-font);
-  background-image: url("/assets/images/logo/macos-bg.jpg");
-  background-size: cover;
-  background-position: center;
+  font-family: "Pixelify Sans", sans-serif;
+  /*background-size: cover;
+  background-position: center;*/
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,7 +74,7 @@ img {
   position: fixed;
   top: 50px;
   right: 30px;
-  background-color: var(--dropdown-bg);
+  background-color: white;
   box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.2);
   padding: 8px;
   border-radius: 50%;
@@ -357,7 +356,7 @@ body.light-mode:before {
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  background-image: url("https://www.transparenttextures.com/patterns/cubes.png"),
+  /*background-image: url("https://www.transparenttextures.com/patterns/cubes.png"),
     linear-gradient(
       to right top,
       #cf4af3,
@@ -373,7 +372,7 @@ body.light-mode:before {
       #ffc848,
       #ffe652
     );
-  border-radius: 14px;
+  border-radius: 14px;*/
   padding: 20px 40px;
 }
 @media screen and (max-width: 415px) {

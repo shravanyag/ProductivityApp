@@ -7,13 +7,14 @@
 /*===========================
 		COMMON css
 ===========================*/
-@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: "Sen", sans-serif;
+  font-family: "Pixelify Sans", sans-serif;
+  font-optical-sizing: auto;
   font-weight: normal;
   font-style: normal;
   color: rgba(0, 0, 0, 0.7);
@@ -40,7 +41,7 @@ button:focus,
 }
 
 a:hover {
-  color: #5F6FFF;
+  color: #54555a;
 }
 
 a {
@@ -184,7 +185,7 @@ p {
   z-index: 5;
   transition: all .4s ease-in-out;
   border: 2px solid transparent;
-  background: #FB7370;
+  background: #fafafa;
   overflow: hidden;
 }
 
@@ -639,15 +640,15 @@ p {
 }
 
 .header-btn .main-btn {
-  color: #fff;
+  color: #000000;
   background: rgba(255, 255, 255, 0.11);
   padding: 11px 23px;
-  border: 1px solid #fff;
+  border: 1px solid #000000;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px), (max-width: 767px) {
   .header-btn .main-btn {
-    color: #fff;
+    color: #000000;
     background: rgba(255, 255, 255, 0.11);
     margin-left: 0;
     margin-right: 60px;
@@ -663,10 +664,10 @@ p {
   height: 820px;
   display: flex;
   align-items: center;
-  background-image: url("../images/hero/hero-bg.svg");
+  /*background-image: url("../images/hero/hero-bg.svg");
   background-size: cover;
   background-position: bottom center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
   z-index: 1;
 }
 
@@ -691,7 +692,7 @@ p {
 
 .hero-section .hero-content h1 {
   margin-bottom: 15px;
-  color: #fff;
+  color: #000000;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -711,12 +712,12 @@ p {
   -webkit-text-fill-color: transparent;
   /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: #fff;
+  -webkit-text-stroke-color: #000000;
 }
 
 .hero-section .hero-content p {
   margin-bottom: 30px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.8);
   font-size: 18px;
 }
 
