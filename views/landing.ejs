@@ -19,6 +19,24 @@
     <link rel="stylesheet" href="/assets/css/tiny-slider.css" />
     <link rel="stylesheet" href="/assets/css/animate.css" />
     <link rel="stylesheet" href="/assets/css/main.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      .column {
+        float: centre;
+        width: 50%;
+        padding: 100px;
+        
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+    </style>
   </head>
   <body>
     <!--[if lte IE 9]>
@@ -48,28 +66,37 @@
     </div>
     <!-- preloader end -->
     <!-- ========================= hero-section start ========================= -->
-    <section id="" class="hero-section">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="">
-            <div class="hero-content">
-              <h1>focus pocus</h1>
-              <p>spellbound to boost your productivity</p>
+    
+      <div class="row">
+        <div class="column">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="">
+                <div class="hero-content">
+                  <img src="/assets/images/noun-pixel-6161955.png" alt="FocusPocus" style="width:100px;height:100px;">
+                  <h1>focus pocus</h1>
+                  <br><br>
+                  <p>spellbound to boost your productivity</p>
+                </div>
+              </div>
+              <div><br><br><br></div>
+              <div class="header-btn">
+                <button id="login-btn" class="main-btn btn-hover">
+                  Loading...
+                </button>
+              </div>
+              <div class="">
+              </div>
             </div>
           </div>
-          <div class="header-btn">
-            <button id="login-btn" class="main-btn btn-hover">
-              Loading...
-            </button>
-          </div>
-          <div class="">
-          </div>
         </div>
-      </div>
-      <div>
-        <img src="/assets/images/study.webp" alt="FocusPocus" style="width:500px;height:500px;">
-      </div>
-    </section>
+        <div class="column">
+          <img src="/assets/images/study.webp" alt="FocusPocus" style="width:500px;height:500px;">
+        </div>
+    </div>
+ 
+
+    
     <!-- ========================= hero-section end ========================= -->
 
     <!-- ========================= JS here ========================= -->

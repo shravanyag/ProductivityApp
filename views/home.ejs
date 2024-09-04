@@ -8,7 +8,7 @@
     <link
       rel="shortcut icon"
       type="image/x-icon"
-      href="/assets/images/favicon.svg"
+      href="/assets/images/favicon.png"
     />
     <link rel="stylesheet" href="styles/home.css" />
     <!-- Scripts -->
@@ -17,26 +17,44 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="/js/firebaselogin.js"></script>
     <script src="/js/logout.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap");
+      .content-button {
+  display: inline-block;
+  font-family: "Pixelify Sans", sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  padding: 17px 35px;
+  font-size: 18px;
+  line-height: 1;
+  border-radius: 50px;
+  color: #000000;
+  cursor: pointer;
+  transition: all .4s ease-in-out;
+  border: 2px solid transparent;
+  border-color: black;
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.content-button:hover {
+  color: #fff;
+}
+
+    </style>
   </head>
 
   <body>
     <!-- Dark-Light Mode button -->
     <div class="dark-light">
-      <svg
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="1.5"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
-      </svg>
+      
     </div>
     <div class="app">
       <!-- Header Division -->
       <div class="header">
-        <div class="menu-circle"></div>
+        
         <div class="header-menu">
           <a class="menu-link is-active" href="#">Home</a>
         </div>
@@ -65,27 +83,25 @@
         <!-- Left side Wrapper -->
         <div class="left-side">
           <div class="side-wrapper">
-            <div class="side-menu">
-              <a href="/landing">
-                <img
-                  src="/assets/images/logo/logo-2-home.svg"
-                  alt="Logo"
-                  style="display: block; margin-left: auto; margin-right: auto"
-                />
-              </a>
-            </div>
             <div class="side-title">User Details</div>
             <div class="side-menu">
               <a id="username">Loading...</a>
               <a id="useremail">Loading...</a>
             </div>
+            <div class="">              
+              <div class="app-card-buttons">
+                <button class="content-button status-button1">
+                  Create Your Room
+                </button>
+              </div>
+            </div>
+            <div class="">
+              <div class="app-card-buttons">
+                <button class="content-button status-button2">Join Room with Key</button>
+              </div>
+            </div>
           </div>
-          <div class="side-wrapper">
-            <div class="side-title">My Rooms</div>
-            <div class="side-menu" id="user-rooms">Loading...</div>
-            <div class="side-title">Recent rooms</div>
-            <div class="side-menu" id="last-rooms">Loading...</div>
-          </div>
+          
         </div>
         <div class="main-container">
           <div class="main-header">
@@ -210,10 +226,10 @@
                       <button
                         style="
                           padding: 10px;
-                          background: #5784f5;
-                          color: #fff;
+                          background: #ffffff;
+                          color: #000000;
                           font-size: 18px;
-                          border: none;
+                          border: 2px solid transparent;
                           outline: none;
                           border-radius: 10px;
                           cursor: pointer;
@@ -264,39 +280,15 @@
               
             </div>
             <div class="content-section">
-              <div class="content-section-title">Apps in your plan</div>
+              <div class="content-section-title"></div>
               <div class="apps-card">
-                <div class="app-card">
-                  <span>
-                    <img
-                      id="app-card-img-1"
-                      src="https://img.icons8.com/ios/50/ffffff/video-call.png"
-                      style="border: 3px; padding: 10px"
-                    />
-                    Create Meeting
-                  </span>
-                  <div class="app-card__subtext">Create your own room</div>
-                  <div class="app-card-buttons">
-                    <button class="content-button status-button1">
-                      Create
-                    </button>
-                  </div>
+                
                 </div>
-                <div class="app-card">
-                  <span>
-                    <img
-                      id="app-card-img-2"
-                      src="https://img.icons8.com/ios/50/ffffff/meeting-room.png"
-                      style="border: 3px; padding: 10px"
-                    />
-
-                    Join Meeting
-                  </span>
-                  <div class="app-card__subtext">Join meeting by meet ID</div>
-                  <div class="app-card-buttons">
-                    <button class="content-button status-button2">Join</button>
-                  </div>
-                </div>
+                <div class="side-wrapper">
+                  <div class="side-title">My Rooms</div>
+                  <div class="side-menu" id="user-rooms">Loading...</div>
+                  <div class="side-title">Recent rooms</div>
+                  <div class="side-menu" id="last-rooms">Loading...</div>
                 </div>
               </div>
             </div>

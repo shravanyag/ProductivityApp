@@ -664,6 +664,7 @@ p {
   height: 820px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   /*background-image: url("../images/hero/hero-bg.svg");
   background-size: cover;
   background-position: bottom center;
@@ -713,6 +714,24 @@ p {
   /* Will override color (regardless of order) */
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #000000;
+}
+
+
+.hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns text content to the left */
+  justify-content: center; /* Vertically centers the text */
+}
+
+
+.hero-section img {
+  flex: 1;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .hero-section .hero-content p {
