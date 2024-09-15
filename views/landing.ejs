@@ -23,12 +23,28 @@
       * {
         box-sizing: border-box;
       }
-      .column {
-        float: centre;
-        width: 50%;
-        padding: 100px;
-        
-      }
+     
+      /* Container adjustments */
+.row {
+  display: flex;
+  align-items: stretch; /* Ensure columns take up full height */
+}
+
+.column {
+  flex: 1; /* Allow columns to grow and take available space */
+  display: flex;
+  align-items: center; /* Center content vertically */
+  justify-content: flex-start; /* Align content to the left */
+  padding: 100px; /* Remove padding if not needed */
+  float: centre;
+  width: 100%;
+}
+
+.column img {
+  max-width: 100%; /* Ensure image is responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+
 
       /* Clear floats after the columns */
       .row:after {
@@ -73,10 +89,14 @@
             <div class="row align-items-center">
               <div class="">
                 <div class="hero-content">
-                  <img src="/assets/images/noun-pixel-6161955.png" alt="FocusPocus" style="width:100px;height:100px;">
-                  <h1>focus pocus</h1>
+                  <img src="/assets/images/noun-pixel-6161955.png" alt="FocusPocus" style="width:200px;height:200px;">
+                  <h1>
+                    <span class="word" style="animation-delay: 0s;">Focus</span>
+                    <span class="word" style="animation-delay: 0.5s;">Pocus</span>
+                  </h1>
+                  
                   <br><br>
-                  <p>spellbound to boost your productivity</p>
+                  <p>Spellbound to boost your productivity</p>
                 </div>
               </div>
               <div><br><br><br></div>
@@ -91,7 +111,7 @@
           </div>
         </div>
         <div class="column">
-          <img src="/assets/images/study.webp" alt="FocusPocus" style="width:500px;height:500px;">
+          <img src="/assets/images/study.webp" alt="FocusPocus" style="width:2000px;height:800px; ">
         </div>
     </div>
  
