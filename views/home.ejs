@@ -48,8 +48,9 @@
 
   <body>
     <!-- Dark-Light Mode button -->
+     
     <div class="dark-light">
-      
+      <img src="/assets/images/clock.gif" alt="Clock" class="top-left-image">
     </div>
     <div class="app">
       <!-- Header Division -->
@@ -64,7 +65,7 @@
             onclick="LogoutUser()"
             style="
               padding: auto;
-              font-size: 15px;
+              font-size: 20px;
               margin-top: 0;
               padding: 6px 24px;
             "
@@ -84,7 +85,7 @@
         <div class="left-side">
           <div class="side-wrapper">
             <div class="side-title">User Details</div>
-            <div class="side-menu">
+            <div class="side-menu1">
               <a id="username">Loading...</a>
               <a id="useremail">Loading...</a>
             </div>
@@ -187,12 +188,13 @@
                   </div>
                   <div class="pop-up1__subtitle">
                     Enter the chat and Invite people
-                  </div>
+                 <br>
                   <label for="room-name">Enter room name</label>
-                  <input
+                </div><input
                     type="text"
                     id="room-name"
                     placeholder="Optional (Recommended)"
+                    class="styled-input"
                   /><br />
 
                   <div class="content-button-wrapper">
@@ -219,30 +221,28 @@
                         text-align: center;
                         color: azure;
                         display: none;
-                        border-radius: 99em;
+                        border-radius: 999em;
                       "
                       id="room-id"
                     >
-                      <button
-                        style="
-                          padding: 10px;
-                          background: #ffffff;
-                          color: #000000;
-                          font-size: 18px;
-                          border: 2px solid transparent;
-                          outline: none;
-                          border-radius: 10px;
-                          cursor: pointer;
-                        "
-                        id="copy-room-id"
-                      >
-                      </button>
+                    <button
+                    id="copy-room-id"
+                    class="copy-button"
+                  >
+                    <i class="fas fa-copy"></i>  
+                    <link
+                      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+                      rel="stylesheet"
+                    />
+
+                  </button>
+                  
                     </p>
                   </div>
                 </div>
                 <!-- Join Room -->
                 <div class="pop-up2">
-                  <div class="pop-up2__title">
+                  <div class="pop-up1__title">
                     Join Room
                     <svg
                       class="close2"
@@ -261,15 +261,16 @@
                   </div>
 
                   <!-- Join meet here -->
-                  <div class="pop-up2__subtitle">Enter the chat or Room ID</div>
-                  <label for="meeting-id">Enter room ID</label>
-                  <input type="text" id="meeting-id" /><br />
+                  <div class="pop-up1__subtitle">Enter the chat or Room ID<br>
+                  <label for="meeting-id">Enter room ID</label></div>
+                  <input type="text" id="meeting-id" class="styled-input"/><br />
                   <div class="content-button-wrapper">
                     <button
                       class="content-button status-button2"
                       onclick="joinMeet()"
                       type="button"
                       id="submitRoomName"
+                      
                     >
                       Submit
                     </button>
@@ -289,6 +290,7 @@
                   <div class="side-menu" id="user-rooms">Loading...</div>
                   <div class="side-title">Recent rooms</div>
                   <div class="side-menu" id="last-rooms">Loading...</div>
+                  
                 </div>
               </div>
             </div>
@@ -296,6 +298,7 @@
         </div>
       </div>
     </div>
+    <img src="/assets/images/clock.gif" alt="Clock" class="bottom-right-image">
   </body>
   <script src="/js/home.js" defer></script>
 </html>
