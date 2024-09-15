@@ -214,16 +214,40 @@ body.light-mode:before {
   list-style: none;
 }
 
+/* Styling for the main message container */
 .main__message_container {
   position: relative;
-  padding: 22px 12px;
+  padding: 12px 20px; /* Slightly adjusted padding for balance */
   display: flex;
+  align-items: center; /* Center items vertically */
+  background-color: #f0f0f0; /* Light background color */
+  border-radius: 30px; /* More rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
+/* Styling for the input field inside the container */
 .main__message_container input {
   flex-grow: 1;
-  background-color: transparent;
-  border-radius: 99em;
-  /* border: none; */
-  color: #f5f5f5;
+  background: #ffffff; /* White background for input */
+  border: 1px solid #ddd; /* Light gray border */
+  border-radius: 30px; /* Rounded corners to match container */
+  padding: 12px 20px; /* Comfortable padding inside input */
+  color: #333; /* Dark text color for contrast */
+  font-size: 16px; /* Adjusted font size for readability */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light outer shadow for depth */
+  transition: all 0.3s ease; /* Smooth transition for all properties */
 }
+
+/* Styling for input on focus */
+.main__message_container input:focus {
+  border-color: #8d9094; /* Blue border color on focus */
+  box-shadow: 0 0 8px rgba(226, 226, 229, 0.3); /* Blue shadow on focus */
+  background: #f9f9f9; /* Slightly darker background on focus */
+}
+
+/* Optional: Add a placeholder styling */
+.main__message_container input::placeholder {
+  color: #aaa; /* Lighter text color for placeholder */
+}
+
