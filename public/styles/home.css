@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 :root {
   --theme-bg-color: rgb(255, 255, 255);
   --border-color: rgb(0, 0, 0);
@@ -38,49 +39,126 @@
   --content-title-color: --theme-color;
 }
 
-html {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
-  max-width: 100%;
+
+
+.top-left-image {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  left: 10px; /* Adjust as needed */
+  width: 250px; /* Adjust size as needed */
+  height: 300px; /* Maintain aspect ratio */
+  z-index: 10; /* Ensure it is above other content */
+}
+
+.bottom-right-image {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  width: 250px; /* Adjust size as needed */
+  height: 300px; /* Maintain aspect ratio */
+  z-index: 10; /* Ensure it is above other content */
+}
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
   overflow-x: hidden;
+  font-family: "Pixelify Sans", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
-  max-width: 100%;
-  overflow-x: hidden;
-
-  font-family: "Pixelify Sans", sans-serif;
-  /*background-size: cover;
-  background-position: center;*/
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  padding: 2em;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.main-container {
   width: 100%;
-  height: 100vh;
+  max-width: 1200px; /* Optional max width */
+  padding: 20px; /* Adjust padding as needed */
+  text-align: center; /* Center text or content inside */
 }
-@media screen and (max-width: 480px) {
-  body {
-    padding: 0.8em;
-  }
+
+
+.styled-input {
+  width: 100%; /* Make it responsive */
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 500;
+  border: 2px solid var(--theme-color); /* Add a solid border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: all 0.3s ease; /* Smooth transition */
 }
+
+/* Focus effect */
+.styled-input:focus {
+  outline: none;
+  border-color: var(--hover-theme-color); /* Change border color on focus */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Increase shadow on focus */
+}
+
+/* Placeholder styling */
+.styled-input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Optional hover effect */
+.styled-input:hover {
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15); /* Slightly stronger shadow */
+}
+
+.copy-button {
+  padding: 8px 16px; /* Reduced padding for a smaller button */
+  background-color: #f0f0f0; /* Light background */
+  color: #000000;
+  font-size: 16px; /* Adjusted font size */
+  font-weight: bold;
+  border: 2px solid #ccc; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center; /* Vertically center the icon and text */
+  justify-content: center;
+  transition: background-color 0.3s, border-color 0.3s;
+  padding-left: 1rem;
+}
+
+.copy-button i {
+  margin-right: 6px; /* Space between icon and text */
+  font-size: 18px; /* Adjust icon size */
+}
+
+/* Hover effect */
+.copy-button:hover {
+  background-color: #d3d3d3; /* Darker shade on hover */
+  border-color: #888; /* Change border color on hover */
+}
+
+/* Optional focus effect */
+.copy-button:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Shadow when focused */
+}
+
 
 img {
   max-width: 100%;
 }
 
-.dark-light {
-  position: fixed;
-  top: 50px;
-  right: 30px;
-  background-color: white;
-  box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.2);
-  padding: 8px;
-  border-radius: 50%;
-  z-index: 3;
-  cursor: pointer;
-}
+
 .dark-light svg {
   width: 24px;
   flex-shrink: 0;
@@ -167,23 +245,47 @@ body.light-mode:before {
 .header-menu {
   display: flex;
   align-items: center;
+  font-size: 25px;
 }
 .header-menu a {
   padding: 20px 30px;
   text-decoration: none;
   color: var(--inactive-color);
   border-bottom: 2px solid transparent;
-  transition: 0.3s;
+  transition: color 0.3s ease, border-bottom 0.3s ease, transform 0.3s ease;
+  position: relative;
 }
+
 @media screen and (max-width: 610px) {
   .header-menu a:not(.main-header-link) {
     display: none;
   }
 }
+
 .header-menu a.is-active,
 .header-menu a:hover {
   color: var(--theme-color);
   border-bottom: 2px solid var(--theme-color);
+  transform: translateY(-5px); /* Slide up a bit */
+}
+
+@keyframes hoverEffect {
+  0% {
+    letter-spacing: 0px;
+    opacity: 0.8;
+  }
+  50% {
+    letter-spacing: 2px;
+    opacity: 1;
+  }
+  100% {
+    letter-spacing: 0px;
+    opacity: 0.8;
+  }
+}
+
+.header-menu a {
+  animation: hoverEffect 1.5s infinite ease-in-out;
 }
 
 .menu-circle {
@@ -260,19 +362,79 @@ body.light-mode:before {
 
 .side-wrapper + .side-wrapper {
   margin-top: 20px;
-}
 
+}
 .side-title {
   color: var(--inactive-color);
   margin-bottom: 14px;
+  font-weight: bold; /* Make the text bold */
+  animation: smoothPulse 1.5s ease-in-out infinite; /* Subtle animation */
+  display: inline-block;
+  padding-top: 2rem;
+  font-size: 20px;
 }
 
+/* Define the animation */
+@keyframes smoothPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05); /* Slightly increase the size */
+  }
+  100% {
+    opacity: 0.8;
+    transform: scale(1); /* Return to original size */
+  }
+}
+
+/* General Styling for Side Menu Container */
 .side-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Responsive grid columns */
+  gap: 20px; /* Space between cards */
+}
+
+/* Card Style for Each Menu Item */
+.side-menu a {
+  text-decoration: none;
+  color: var(--theme-color);
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content within the card */
+  font-weight: 400;
+  width: 150px; /* Fixed width for square shape */
+  height: 150px; /* Fixed height for square shape */
+  border-radius: 8px; /* Rounded corners for card effect */
+  background-color: #ffffff; /* Card background color */
+  border: 1px solid #ddd; /* Thin outline */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+  transition: 0.3s;
+  overflow: hidden; /* Hide overflow for rounded corners */
+  text-align: center; /* Center text within the card */
+}
+
+/* Hover Effect for Card */
+.side-menu a:hover {
+  background-color: var(--hover-menu-bg); /* Background color on hover */
+  border-color: #bbb; /* Change outline color on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+
+/* Adjusting SVG Icon Position */
+.side-menu svg {
+  width: 24px; /* Adjust icon size */
+  margin-right: 10px; /* Spacing from text */
+}
+
+.side-menu1 {
   display: flex;
   flex-direction: column;
   white-space: nowrap;
 }
-.side-menu a {
+.side-menu1 a {
   text-decoration: none;
   color: var(--theme-color);
   display: flex;
@@ -283,13 +445,11 @@ body.light-mode:before {
   border-radius: 6px;
   transition: 0.3s;
 }
-.side-menu a:hover {
-  background-color: var(--hover-menu-bg);
-}
-.side-menu svg {
+.side-menu1 svg {
   width: 16px;
   margin-right: 8px;
 }
+
 
 .updates {
   position: relative;
@@ -330,12 +490,42 @@ body.light-mode:before {
   text-decoration: none;
   color: var(--theme-color);
   padding: 0 30px;
+  font-weight: bold; /* Make the text bold */
+  transition: color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  position: relative;
+  font-size: 30px;
 }
+
+.menu-link-main:hover {
+  color: var(--hover-theme-color); /* Change to a different color on hover */
+  transform: scale(1.05); /* Slightly enlarges the link */
+  opacity: 0.9; /* Makes it more opaque */
+}
+
 @media screen and (max-width: 1055px) {
   .menu-link-main {
     display: none;
   }
 }
+
+/* Optional Animation for hover effect */
+@keyframes hoverLinkEffect {
+  0% {
+    letter-spacing: 0px;
+  }
+  50% {
+    letter-spacing: 1px;
+  }
+  100% {
+    letter-spacing: 0px;
+  }
+}
+
+.menu-link-main {
+  animation: hoverLinkEffect 1s infinite ease-in-out;
+  font-weight: bold; /* Ensures boldness is consistent across all states */
+}
+
 
 .content-wrapper {
   display: flex;
@@ -422,7 +612,6 @@ body.light-mode:before {
   line-height: 1.7em;
   color: #ebecec;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -433,7 +622,7 @@ body.light-mode:before {
 }
 
 .content-button {
-  background-color: #3a6df0;
+  background-color: #131314;
   border: none;
   padding: 8px 26px;
   color: #fff;
@@ -565,7 +754,7 @@ body.light-mode:before {
 }
 
 .content-button:not(.open):hover {
-  background: #1e59f1;
+  background: #101011;
 }
 
 .menu {
@@ -758,6 +947,7 @@ input {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: white;
 }
 .pop-up1__subtitle {
   white-space: normal;
@@ -765,6 +955,7 @@ input {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8em;
+  color: white;
 }
 .pop-up1__subtitle a {
   color: var(--theme-color);
