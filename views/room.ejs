@@ -77,7 +77,7 @@
       }
 
       #todo-list {
-        list-style-type: none; /* Removes bullet points */
+        list-style-type: none;
         padding-left: 0;
       }
 
@@ -86,8 +86,57 @@
         gap: 5px;
         margin-top: 10px;
       }
+
+      .timer-widget {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        z-index: 1000;
+      }
+      .timer-display {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .timer-widget button {
+        padding: 5px 10px;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      .timer-types {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+      .timer-type {
+        padding: 5px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+      .timer-type.active {
+        background-color: #e0e0e0;
+        font-weight: bold;
+      }
+      .timer-settings {
+        font-size: 12px;
+      }
+      .timer-settings input {
+        width: 40px;
+        margin-right: 5px;
+      }
     </style>
-    
   </head>
   <body>
     <div class="dark-light">
@@ -194,10 +243,33 @@
         </div>
       </div>
     </div>
-  </body>
-  <!-- <script src="/js/home.js" defer></script> -->
-  <script>
-    function toggleTodo() {
+
+    <div class="timer-widget">
+      <div class="timer-types">
+        <div class="timer-type active" data-type="pomodoro">Pomodoro</div>
+        <div class="timer-type" data-type="shortBreak">Short Break</div>
+        <div class="timer-type" data-type="longBreak">Long Break</div>
+      </div>
+      <div class="timer-display" id="timer">25:00</div>
+      <div class="controls">
+        <button id="startBtn">Start</button>
+        <button id="resetBtn">Reset</button>
+      </div>
+      <div class="timer-settings">
+        <div>
+          <label>Pomodoro: <input type="number" id="pomodoroTime" value="25" min="1"> min</label>
+        </div>
+        <div>
+          <label>Short Break: <input type="number" id="shortBreakTime" value="5" min="1"> min</label>
+        </div>
+        <div>
+          <label>Long Break: <input type="number" id="longBreakTime" value="15" min="1"> min</label>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleTodo() {
         const todoDiv = document.querySelector(".todo");
         if (todoDiv.style.display === "none" || todoDiv.style.display === "") {
           todoDiv.style.display = "block";
@@ -206,26 +278,139 @@
         }
       }
 
-    function addTodo() {
-      const todoInput = document.getElementById("todo_input");
-      const todoList = document.getElementById("todo-list");
-      const newTask = todoInput.value;
-      if (newTask) {
-        const listItem = document.createElement("li");
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.id = "todo-" + todoList.children.length;
-        
-        const label = document.createElement("label");
-        label.htmlFor = checkbox.id;
-        label.textContent = newTask;
+      function addTodo() {
+        const todoInput = document.getElementById("todo_input");
+        const todoList = document.getElementById("todo-list");
+        const newTask = todoInput.value;
+        if (newTask) {
+          const listItem = document.createElement("li");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.id = "todo-" + todoList.children.length;
+          
+          const label = document.createElement("label");
+          label.htmlFor = checkbox.id;
+          label.textContent = newTask;
 
-        listItem.appendChild(checkbox);
-        listItem.appendChild(label);
-        todoList.appendChild(listItem);
-        
-        todoInput.value = "";
+          listItem.appendChild(checkbox);
+          listItem.appendChild(label);
+          todoList.appendChild(listItem);
+          
+          todoInput.value = "";
+        }
       }
-    }
-  </script>
+
+      // Timer functionality
+      let timer;
+      let timeLeft = 25 * 60;
+      let isRunning = false;
+      let currentMode = 'pomodoro';
+
+      const timerDisplay = document.getElementById('timer');
+      const startBtn = document.getElementById('startBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const timerTypes = document.querySelectorAll('.timer-type');
+      const pomodoroTimeInput = document.getElementById('pomodoroTime');
+      const shortBreakTimeInput = document.getElementById('shortBreakTime');
+      const longBreakTimeInput = document.getElementById('longBreakTime');
+
+      function updateDisplay() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+
+      function startTimer() {
+        if (!isRunning) {
+          isRunning = true;
+          startBtn.textContent = 'Pause';
+          timer = setInterval(() => {
+            timeLeft--;
+            updateDisplay();
+            if (timeLeft === 0) {
+              clearInterval(timer);
+              isRunning = false;
+              startBtn.textContent = 'Start';
+              alert('Timer finished!');
+              switchMode();
+            }
+          }, 1000);
+        } else {
+          clearInterval(timer);
+          isRunning = false;
+          startBtn.textContent = 'Resume';
+        }
+      }
+
+      function resetTimer() {
+        clearInterval(timer);
+        isRunning = false;
+        startBtn.textContent = 'Start';
+        setTimeForMode(currentMode);
+        updateDisplay();
+      }
+
+      function setTimeForMode(mode) {
+        switch (mode) {
+          case 'pomodoro':
+            timeLeft = pomodoroTimeInput.value * 60;
+            break;
+          case 'shortBreak':
+            timeLeft = shortBreakTimeInput.value * 60;
+            break;
+          case 'longBreak':
+            timeLeft = longBreakTimeInput.value * 60;
+            break;
+        }
+      }
+
+      function switchMode() {
+        if (currentMode === 'pomodoro') {
+          currentMode = 'shortBreak';
+        } else if (currentMode === 'shortBreak') {
+          currentMode = 'pomodoro';
+        } else {
+          currentMode = 'pomodoro';
+        }
+        setTimeForMode(currentMode);
+        resetTimer();
+        updateActiveTimerType();
+      }
+
+      function updateActiveTimerType() {
+        timerTypes.forEach(type => {
+          if (type.dataset.type === currentMode) {
+            type.classList.add('active');
+          } else {
+            type.classList.remove('active');
+          }
+        });
+      }
+
+      startBtn.addEventListener('click', startTimer);
+      resetBtn.addEventListener('click', resetTimer);
+
+      timerTypes.forEach(type => {
+        type.addEventListener('click', () => {
+          currentMode = type.dataset.type;
+          updateActiveTimerType();
+          resetTimer();
+        });
+      });
+
+      // Add event listeners for time input changes
+      pomodoroTimeInput.addEventListener('change', () => {
+        if (currentMode === 'pomodoro') resetTimer();
+      });
+      shortBreakTimeInput.addEventListener('change', () => {
+        if (currentMode === 'shortBreak') resetTimer();
+      });
+      longBreakTimeInput.addEventListener('change', () => {
+        if (currentMode === 'longBreak') resetTimer();
+      });
+
+      // Initialize
+      updateDisplay();
+    </script>
+  </body>
 </html>
