@@ -248,8 +248,11 @@ body.light-mode:before {
 
 .main__header {
   padding-top: 5px;
-  color: #f5f5f5;
   text-align: center;
+}
+
+.main__header h4 {
+  color: var(--theme-color);
 }
 
 .main__chat_window {
@@ -258,7 +261,7 @@ body.light-mode:before {
 }
 
 .messages {
-  color: rgb(0, 0, 0);
+  color: white;
   list-style: none;
   padding: 0px 16px;
 }
@@ -272,7 +275,14 @@ body.light-mode:before {
   flex-grow: 1;
   background-color: transparent;
   border: none;
-  color: #000000;
+  color: black;
+}
+
+.main__message_container #chat_message {
+  flex-grow: 1;
+  background-color: transparent;
+  border: none;
+  color: var(--theme-color);
 }
 
 .leave_meeting {

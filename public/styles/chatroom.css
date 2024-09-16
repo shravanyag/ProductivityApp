@@ -250,5 +250,3 @@ body.light-mode:before {
 .main__message_container input::placeholder {
   color: #aaa; /* Lighter text color for placeholder */
 }
-
-
