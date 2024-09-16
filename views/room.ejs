@@ -97,6 +97,7 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         width: 250px;
         z-index: 1000;
+        cursor: move;
       }
       .timer-display {
         font-size: 24px;
@@ -244,7 +245,7 @@
       </div>
     </div>
 
-    <div class="timer-widget">
+    <div class="timer-widget" id="timerWidget">
       <div class="timer-types">
         <div class="timer-type active" data-type="pomodoro">Pomodoro</div>
         <div class="timer-type" data-type="shortBreak">Short Break</div>
@@ -269,148 +270,116 @@
     </div>
 
     <script>
-      function toggleTodo() {
-        const todoDiv = document.querySelector(".todo");
-        if (todoDiv.style.display === "none" || todoDiv.style.display === "") {
-          todoDiv.style.display = "block";
-        } else {
-          todoDiv.style.display = "none";
+      let isDragging = false,
+        initialX,
+        initialY,
+        currentX = 0,
+        currentY = 0,
+        xOffset = 0,
+        yOffset = 0;
+
+      const timerWidget = document.getElementById("timerWidget");
+
+      timerWidget.addEventListener("mousedown", dragStart);
+      document.addEventListener("mousemove", drag);
+      document.addEventListener("mouseup", dragEnd);
+
+      function dragStart(e) {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+        isDragging = true;
+      }
+
+      function drag(e) {
+        if (isDragging) {
+          e.preventDefault();
+          currentX = e.clientX - initialX;
+          currentY = e.clientY - initialY;
+
+          xOffset = currentX;
+          yOffset = currentY;
+
+          setTranslate(currentX, currentY, timerWidget);
         }
       }
 
-      function addTodo() {
-        const todoInput = document.getElementById("todo_input");
-        const todoList = document.getElementById("todo-list");
-        const newTask = todoInput.value;
-        if (newTask) {
-          const listItem = document.createElement("li");
-          const checkbox = document.createElement("input");
-          checkbox.type = "checkbox";
-          checkbox.id = "todo-" + todoList.children.length;
-          
-          const label = document.createElement("label");
-          label.htmlFor = checkbox.id;
-          label.textContent = newTask;
-
-          listItem.appendChild(checkbox);
-          listItem.appendChild(label);
-          todoList.appendChild(listItem);
-          
-          todoInput.value = "";
-        }
+      function dragEnd() {
+        initialX = currentX;
+        initialY = currentY;
+        isDragging = false;
       }
 
-      // Timer functionality
-      let timer;
-      let timeLeft = 25 * 60;
-      let isRunning = false;
-      let currentMode = 'pomodoro';
-
-      const timerDisplay = document.getElementById('timer');
-      const startBtn = document.getElementById('startBtn');
-      const resetBtn = document.getElementById('resetBtn');
-      const timerTypes = document.querySelectorAll('.timer-type');
-      const pomodoroTimeInput = document.getElementById('pomodoroTime');
-      const shortBreakTimeInput = document.getElementById('shortBreakTime');
-      const longBreakTimeInput = document.getElementById('longBreakTime');
-
-      function updateDisplay() {
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      function setTranslate(xPos, yPos, el) {
+        el.style.transform = `translate(${xPos}px, ${yPos}px)`;
       }
 
-      function startTimer() {
-        if (!isRunning) {
-          isRunning = true;
-          startBtn.textContent = 'Pause';
-          timer = setInterval(() => {
-            timeLeft--;
-            updateDisplay();
-            if (timeLeft === 0) {
-              clearInterval(timer);
-              isRunning = false;
-              startBtn.textContent = 'Start';
-              alert('Timer finished!');
-              switchMode();
-            }
-          }, 1000);
+      const timerDisplay = document.getElementById("timer");
+      const startBtn = document.getElementById("startBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const pomodoroTimeInput = document.getElementById("pomodoroTime");
+      const shortBreakTimeInput = document.getElementById("shortBreakTime");
+      const longBreakTimeInput = document.getElementById("longBreakTime");
+
+      let timerType = "pomodoro";
+      let timeRemaining = 25 * 60;
+      let timerInterval;
+
+      document.querySelectorAll(".timer-type").forEach((type) => {
+        type.addEventListener("click", () => {
+          document.querySelector(".timer-type.active").classList.remove("active");
+          type.classList.add("active");
+          timerType = type.dataset.type;
+          updateDisplay();
+        });
+      });
+
+      startBtn.addEventListener("click", () => {
+        if (timerInterval) {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          startBtn.textContent = "Start";
         } else {
-          clearInterval(timer);
-          isRunning = false;
-          startBtn.textContent = 'Resume';
+          timerInterval = setInterval(countdown, 1000);
+          startBtn.textContent = "Pause";
+        }
+      });
+
+      resetBtn.addEventListener("click", resetTimer);
+
+      function countdown() {
+        if (timeRemaining > 0) {
+          timeRemaining--;
+          updateDisplay();
+        } else {
+          clearInterval(timerInterval);
+          timerInterval = null;
+          startBtn.textContent = "Start";
         }
       }
 
       function resetTimer() {
-        clearInterval(timer);
-        isRunning = false;
-        startBtn.textContent = 'Start';
-        setTimeForMode(currentMode);
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timeRemaining = getInitialTime();
         updateDisplay();
+        startBtn.textContent = "Start";
       }
 
-      function setTimeForMode(mode) {
-        switch (mode) {
-          case 'pomodoro':
-            timeLeft = pomodoroTimeInput.value * 60;
-            break;
-          case 'shortBreak':
-            timeLeft = shortBreakTimeInput.value * 60;
-            break;
-          case 'longBreak':
-            timeLeft = longBreakTimeInput.value * 60;
-            break;
-        }
+      function updateDisplay() {
+        const minutes = Math.floor(timeRemaining / 60);
+        const seconds = timeRemaining % 60;
+        timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
       }
 
-      function switchMode() {
-        if (currentMode === 'pomodoro') {
-          currentMode = 'shortBreak';
-        } else if (currentMode === 'shortBreak') {
-          currentMode = 'pomodoro';
+      function getInitialTime() {
+        if (timerType === "pomodoro") {
+          return pomodoroTimeInput.value * 60;
+        } else if (timerType === "shortBreak") {
+          return shortBreakTimeInput.value * 60;
         } else {
-          currentMode = 'pomodoro';
+          return longBreakTimeInput.value * 60;
         }
-        setTimeForMode(currentMode);
-        resetTimer();
-        updateActiveTimerType();
       }
-
-      function updateActiveTimerType() {
-        timerTypes.forEach(type => {
-          if (type.dataset.type === currentMode) {
-            type.classList.add('active');
-          } else {
-            type.classList.remove('active');
-          }
-        });
-      }
-
-      startBtn.addEventListener('click', startTimer);
-      resetBtn.addEventListener('click', resetTimer);
-
-      timerTypes.forEach(type => {
-        type.addEventListener('click', () => {
-          currentMode = type.dataset.type;
-          updateActiveTimerType();
-          resetTimer();
-        });
-      });
-
-      // Add event listeners for time input changes
-      pomodoroTimeInput.addEventListener('change', () => {
-        if (currentMode === 'pomodoro') resetTimer();
-      });
-      shortBreakTimeInput.addEventListener('change', () => {
-        if (currentMode === 'shortBreak') resetTimer();
-      });
-      longBreakTimeInput.addEventListener('change', () => {
-        if (currentMode === 'longBreak') resetTimer();
-      });
-
-      // Initialize
-      updateDisplay();
     </script>
   </body>
 </html>
