@@ -270,6 +270,44 @@
     </div>
 
     <script>
+      function toggleTodo() {
+      const todoDiv = document.querySelector(".todo");
+      if (todoDiv.style.display === "none" || todoDiv.style.display === "") {
+        todoDiv.style.display = "block";
+      } else {
+        todoDiv.style.display = "none";
+      }
+    }
+
+    function addTodo() {
+      const todoInput = document.getElementById("todo_input");
+      const todoList = document.getElementById("todo-list");
+      const newTask = todoInput.value.trim();
+      
+      if (newTask) {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+          <input type="checkbox" id="todo-${todoList.children.length}">
+          <label for="todo-${todoList.children.length}">${newTask}</label>
+          <button onclick="removeTodo(this)">Delete</button>
+        `;
+        todoList.appendChild(listItem);
+        todoInput.value = "";
+      }
+    }
+
+    function removeTodo(button) {
+      const listItem = button.parentElement;
+      listItem.remove();
+    }
+
+    // Event listener for the todo input
+    document.getElementById("todo_input").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        addTodo();
+      }
+    });
       let isDragging = false,
         initialX,
         initialY,
