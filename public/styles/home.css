@@ -45,8 +45,8 @@
   position: absolute;
   top: 20px; /* Adjust as needed */
   left: 10px; /* Adjust as needed */
-  width: 250px; /* Adjust size as needed */
-  height: 300px; /* Maintain aspect ratio */
+  width: 150px; /* Adjust size as needed */
+  height: 100px; /* Maintain aspect ratio */
   z-index: 10; /* Ensure it is above other content */
 }
 
@@ -54,8 +54,8 @@
   position: absolute;
   bottom: 20px; /* Adjust as needed */
   right: 10px; /* Adjust as needed */
-  width: 250px; /* Adjust size as needed */
-  height: 300px; /* Maintain aspect ratio */
+  width: 150px; /* Adjust size as needed */
+  height: 100px; /* Maintain aspect ratio */
   z-index: 10; /* Ensure it is above other content */
 }
 
