@@ -701,7 +701,7 @@ input {
 }
 .status-button1:not(.open1):hover {
   color: #fff;
-  border-color: #fff;
+  border-color: #000000;
 }
 /* Pop button for Join Room */
 .status-button2 {
