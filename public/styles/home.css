@@ -394,7 +394,8 @@ body.light-mode:before {
 .side-menu {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid columns */
-  gap: 50px; /* Space between cards */
+  flex-direction: column;
+  gap: 20px; /* Space between cards */
 }
 
 /* Card Style for Each Menu Item */
@@ -405,20 +406,15 @@ body.light-mode:before {
   align-items: center;
   justify-content: center; /* Center content within the card */
   font-weight: 400;
-  width: 250px; /* Fixed width for square shape */
-  height: 150px; /* Fixed height for square shape */
+  width: 150px;
+  height: 100px;
   border-radius: 8px; /* Rounded corners for card effect */
   background-color: #ffffff;  /*Card background color */
-  /*background-image: url("../assets/images/room2.png");*/
-  background-size: 220px 135px;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  border: 3px solid #000000; /* Thin outline */
-  border-style: dashed;
+  border: 1px solid #000000; /* Thin outline */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for depth */
   transition: 0.3s;
   overflow: hidden; /* Hide overflow for rounded corners */
-  text-align: center top; /* Center text within the card */
+  text-align: center; /* Center text within the card */
 }
 
 /* Hover Effect for Card */
