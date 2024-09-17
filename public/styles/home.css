@@ -285,7 +285,7 @@ body.light-mode:before {
 }
 
 .header-menu a {
-  animation: hoverEffect 1.5s infinite ease-in-out;
+  /*animation: hoverEffect 1.5s infinite ease-in-out;*/
 }
 
 .menu-circle {
@@ -368,27 +368,27 @@ body.light-mode:before {
   color: var(--inactive-color);
   margin-bottom: 14px;
   font-weight: bold; /* Make the text bold */
-  animation: smoothPulse 1.5s ease-in-out infinite; /* Subtle animation */
+  /*animation: smoothPulse 1.5s ease-in-out infinite; Subtle animation */
   display: inline-block;
   padding-top: 2rem;
   font-size: 20px;
 }
 
 /* Define the animation */
-@keyframes smoothPulse {
+/*@keyframes smoothPulse {
   0% {
     opacity: 0.8;
     transform: scale(1);
   }
   50% {
     opacity: 1;
-    transform: scale(1.05); /* Slightly increase the size */
+    transform: scale(1.05); /* Slightly increase the size 
   }
   100% {
     opacity: 0.8;
-    transform: scale(1); /* Return to original size */
+    transform: scale(1); /* Return to original size 
   }
-}
+}*/
 
 /* General Styling for Side Menu Container */
 .side-menu {
@@ -522,7 +522,7 @@ body.light-mode:before {
 }
 
 .menu-link-main {
-  animation: hoverLinkEffect 1s infinite ease-in-out;
+  /*animation: hoverLinkEffect 1s infinite ease-in-out;*/
   font-weight: bold; /* Ensures boldness is consistent across all states */
 }
 
@@ -609,7 +609,7 @@ body.light-mode:before {
   font-weight: 400;
   font-size: 14px;
   margin-top: 16px;
-  line-height: 1.7em;
+  /*line-height: 1.7em;*/
   color: #ebecec;
   display: -webkit-box;
   -webkit-box-orient: vertical;

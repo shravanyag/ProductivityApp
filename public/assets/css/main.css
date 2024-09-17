@@ -366,7 +366,7 @@ p {
   font-size: 18px;
 }
 /* ============================ Animations ============================ */
-@keyframes dance {
+/*@keyframes dance {
   0% {
     transform: translateX(0) rotate(0deg);
   }
@@ -388,7 +388,7 @@ p {
   100% {
     transform: translateX(0) rotate(0deg);
   }
-}
+}*/
 
 
 
@@ -397,7 +397,7 @@ p {
   color: rgba(0, 0, 0, 0.8);
   animation: fadeIn 3s ease-in-out;
 }
-@keyframes bounce {
+/*@keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
   }
@@ -407,7 +407,7 @@ p {
   60% {
     transform: translateY(-15px);
   }
-}
+}*/
 
 @keyframes colorChange {
   0% {
@@ -434,7 +434,7 @@ p {
 }
 
 .hero-content h1 {
-  animation: bounce 2s ease infinite, colorChange 5s ease infinite, shadowPulse 3s ease infinite;
+  /*animation: bounce 2s ease infinite, colorChange 5s ease infinite, shadowPulse 3s ease infinite;*/
   font-size: 7rem; /* Adjust size as needed */
   font-weight: bold;
   margin-left: -40px; /* Reduced negative value to move it right */
@@ -444,7 +444,7 @@ p {
 
 @keyframes fadeInOut {
   0%, 100% {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(20px);
   }
   50% {
@@ -456,7 +456,7 @@ p {
 
 .hero-content .word {
   display: inline-block;
-  animation: fadeInOut 2s ease-in-out infinite;
+  /*animation: fadeInOut 2s ease-in-out infinite;*/
 }
 
 
