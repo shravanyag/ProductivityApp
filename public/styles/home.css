@@ -284,9 +284,6 @@ body.light-mode:before {
   }
 }
 
-.header-menu a {
-  /*animation: hoverEffect 1.5s infinite ease-in-out;*/
-}
 
 .menu-circle {
   width: 15px;
