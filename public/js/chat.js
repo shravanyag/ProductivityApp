@@ -42,6 +42,7 @@ function linkify(inputText) {
   return replacedText;
 }
 // Join Room and Render messages with user name and photo from Firebase
+
 firebase.auth().onAuthStateChanged(async function (user) {
   if (user) {
     console.log(user);
@@ -57,14 +58,19 @@ firebase.auth().onAuthStateChanged(async function (user) {
     resp = await resp.json();
     resp.messages.forEach((message) => {
       $("ul").append(
-        `<li class="message" style="font-size: 15px" ><b><img width="40px" style="border-radius: 50%; padding: 5px;" src="${
-          message.user.photoURL
-        }">${message.user.displayName}</b><br/>${linkify(message.content)}</li>`
+        `<li class="message" style="font-size: 15px; font-family: 'Pixelify Sans', sans-serif; font-weight: 400;">
+          <b><img width="40px" style="border-radius: 50%; padding: 5px;" src="${
+            message.user.photoURL
+          }"><span style="font-weight: 700;">${message.user.displayName}</span></b>
+          <br/>${linkify(message.content)}
+        </li>`
       );
       scrollToBottom();
     });
   }
 });
+
+
 
 socket.on("user-connected", (userId) => {
   roomUsers.push(userId);
