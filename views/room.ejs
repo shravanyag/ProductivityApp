@@ -36,14 +36,15 @@
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
     <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
-
+    
     <!-- scripts -->
     <script src="/js/firebaselogin.js"></script>
     <script src="/js/logout.js"></script>
     <script src="script.js" defer></script>
-
+    
     <!-- css -->
     <link rel="stylesheet" href="/styles/room.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
       .todo {
@@ -100,19 +101,24 @@
         cursor: move;
       }
       .timer-display {
-        font-size: 24px;
+        font-size: 34px;
         text-align: center;
-        margin-bottom: 10px;
+        width: 50%;
+        display:inline-block;
       }
       .controls {
-        display: flex;
         justify-content: space-between;
-        margin-bottom: 10px;
+        position: absolute;
+        top: 78px;
+        right: 10px;
+        display:inline-block;
       }
       .timer-widget button {
         padding: 5px 10px;
         font-size: 12px;
         cursor: pointer;
+        border: 1px solid #ccc;
+        border-radius: 7px;
       }
       .timer-types {
         display: flex;
@@ -138,6 +144,10 @@
         margin-right: 5px;
       }
 
+      #resetBtn i {
+        cursor: pointer;
+      }
+
       .main__controls {
         position: absolute;
         bottom: 20px;
@@ -147,7 +157,7 @@
       }
 
       .main__controls.chat-open {
-        left: calc(55% - 250px); /* Adjust this value as needed */
+        left: calc(55% - 250px); 
       }
 
       .main__right {
@@ -341,7 +351,7 @@
       <div class="timer-display" id="timer">25:00</div>
       <div class="controls">
         <button id="startBtn">Start</button>
-        <button id="resetBtn">Reset</button>
+        <button id="resetBtn"><i class="fa fa-refresh"></i></button>
       </div>
       <div class="timer-settings">
         <div>
@@ -454,7 +464,8 @@
           document.querySelector(".timer-type.active").classList.remove("active");
           type.classList.add("active");
           timerType = type.dataset.type;
-          updateDisplay();
+          resetTimer(); 
+          // updateDisplay();
         });
       });
 
@@ -493,8 +504,16 @@
       function updateDisplay() {
         const minutes = Math.floor(timeRemaining / 60);
         const seconds = timeRemaining % 60;
-        timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       }
+
+      [pomodoroTimeInput, shortBreakTimeInput, longBreakTimeInput].forEach(input => {
+        input.addEventListener('change', () => {
+          if (timerType === input.id.replace('Time', '')) {
+            resetTimer();
+          }
+        });
+      });
 
       function getInitialTime() {
         if (timerType === "pomodoro") {
@@ -523,10 +542,23 @@
           sendMessage();
         }
       });
-
-      let userName = "User"; // Replace this with actual user name retrieval logic
-
-
+      
+      
+      function setUserName(name) {
+        userName = name;
+      }
+      
+      let userName = "User"; 
+      
+      firebase.auth().onAuthStateChanged(async function (user) {
+        if (user) {
+          const displayName = user.displayName || "User";
+          setUserName(displayName);
+        } else {
+          setUserName("Guest");
+        }
+      });
+      
       // Updated function to send and display messages
       function sendMessage() {
         const messageInput = document.getElementById('chat_message');
@@ -550,16 +582,6 @@
           chatMessages.scrollTop = chatMessages.scrollHeight;
         }
       }
-
-        function setUserName(name) {
-          userName = name;
-        }
-
-        // Example: Prompt for user name when the page loads
-        window.onload = function() {
-          const name = prompt("Please enter your name:", "User");
-          setUserName(name || "User");
-        };
     </script>
   </body>
 </html>
