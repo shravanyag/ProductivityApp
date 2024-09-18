@@ -111,8 +111,15 @@ firebase.auth().onAuthStateChanged(async function (user) {
     document.querySelector("#username").innerHTML =
       user?.displayName || "username"; //
     document.querySelector("#useremail").innerHTML = user?.email || "email"; //
-    document.getElementById("profile-img").src = user?.photoURL;
 
+    // Set the profile image URL or default to user.png if none is available
+    const profileImg = document.getElementById("profile-img");
+    profileImg.src = user?.photoURL || "/assets/images/user.png"; // Fallback to default
+
+    // Check if the image failed to load, and fallback to default if necessary
+    profileImg.onerror = function() {
+      this.src = "/assets/images/user.png";
+    };
     // <--------------------- Get user & user's rooms ------------------------>
     // After the user is authenticated, get their rooms and populate the dropdown
     // This is done on an authStateCHanged event which is fired when the user is

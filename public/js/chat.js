@@ -59,9 +59,12 @@ firebase.auth().onAuthStateChanged(async function (user) {
     resp.messages.forEach((message) => {
       $("ul").append(
         `<li class="message" style="font-size: 15px; font-family: 'Pixelify Sans', sans-serif; font-weight: 400;">
-          <b><img width="40px" style="border-radius: 50%; padding: 5px;" src="${
-            message.user.photoURL
-          }"><span style="font-weight: 700;">${message.user.displayName}</span></b>
+          <b>
+            <img width="40px" style="border-radius: 50%; padding: 5px;" 
+                 src="${message.user.photoURL || '/assets/images/user.png'}" 
+                 onerror="this.src='/assets/images/user.png';" />
+            <span style="font-weight: 700;">${message.user.displayName}</span>
+          </b>
           <br/>${linkify(message.content)}
         </li>`
       );
